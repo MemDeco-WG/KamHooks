@@ -30,7 +30,7 @@ MODULE_PROP_PATH="${KAM_MODULE_ROOT}/module.prop"
 # update.json goes to project root directory
 UPDATE_JSON_PATH="${KAM_PROJECT_ROOT}/update.json"
 # module.json path
-MODULE_JSON_PATH="${KAM_MODULE_ROOT}/module.json"
+MODULE_JSON_PATH="${KAM_PROJECT_ROOT}/module.json"
 
 # Check if the module root directory exists
 if [ ! -d "$KAM_MODULE_ROOT" ]; then
@@ -46,7 +46,7 @@ fi
 # Sync module.prop using kam export (fallback to manual generation)
 ###########################################
 log_info "Exporting module.prop using 'kam export' to: $MODULE_PROP_PATH"
-if kam export --format prop --output "$MODULE_PROP_PATH"; then
+if kam export prop "$MODULE_PROP_PATH"; then
     log_success "module.prop exported via 'kam export' to: $MODULE_PROP_PATH"
 else
     log_error "'kam export' failed for module.prop; aborting"
@@ -57,7 +57,7 @@ fi
 # Sync update.json using kam export (fallback to manual generation)
 ###########################################
 log_info "Exporting update.json using 'kam export' to: $UPDATE_JSON_PATH"
-if kam export --format update --output "$UPDATE_JSON_PATH"; then
+if kam export update "$UPDATE_JSON_PATH"; then
     log_success "update.json exported via 'kam export' to: $UPDATE_JSON_PATH"
 else
     log_error "'kam export' failed for update.json; aborting"
@@ -68,7 +68,7 @@ fi
 # Sync module.json using kam export (fallback to manual generation)
 ###########################################
 log_info "Exporting module.json using 'kam export' to: $MODULE_JSON_PATH"
-if kam export --format json --output "$MODULE_JSON_PATH"; then
+if kam export json "$MODULE_JSON_PATH"; then
     log_success "module.json exported via 'kam export' to: $MODULE_JSON_PATH"
 else
     log_error "'kam export' failed for update.json; aborting"
