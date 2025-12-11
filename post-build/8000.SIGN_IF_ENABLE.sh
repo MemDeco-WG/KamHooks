@@ -43,4 +43,12 @@ fi
 
 # Always perform 'kam' signing as the project's signing step for DSSE/sigstore bundles and timestamping.
 # This ensures repository-specific signature bundles and timestamps are generated as before.
-kam sign "$DIST/$KAM_MODULE_ID-"*.zip --out $DIST --sigstore -t
+#
+# If SIGSTORE_ID_TOKEN is present in the environment (e.g., via OIDC from CI), enable Fulcio
+# certificate issuance and include the short-lived certificate in the Sigstore bundle.
+if [ -n "${SIGSTORE_ID_TOKEN:-}" ]; then
+    log_info "Found SIGSTORE_ID_TOKEN; invoking 'kam sign' with Fulcio/OIDC enabled"
+    kam sign "$DIST/$KAM_MODULE_ID-"*.zip --out $DIST --sigstore -t --fulcio --oidc-token-env SIGSTORE_ID_TOKEN
+else
+    kam sign "$DIST/$KAM_MODULE_ID-"*.zip --out $DIST --sigstore -t
+fi
