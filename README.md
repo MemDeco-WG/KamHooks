@@ -60,7 +60,6 @@ When hooks are executed, Kam injects the following environment variables, which 
 | `KAM_STAGE` | Current build stage: `pre-build` or `post-build`. |
 | `KAM_DEBUG` | Set to `1` to enable debug output in hooks. |
 | `KAM_SIGN_ENABLED` | Set to `1` when build invoked with `-s/--sign`. Useful to trigger automatic signing in hooks. |
-| `KAM_IMMUTABLE_RELEASE` | Set to `1` when build invoked with `-i/--immutable-release`. Hooks can use this to opt into immutable release behavior. |
 | `KAM_PRE_RELEASE` | Set to `1` when build invoked with `-P/--pre-release`. Hooks can use this to change release handling (e.g., skip uploads). |
 
 Example sign command output (shows timestamp attempt and graceful network failure):
