@@ -15,7 +15,7 @@ Hooks are executed in order by their numeric prefix. Template hooks are typicall
 
 ## Built-in Hooks
 
-### `1.SYNC_MODULE_FILES.sh` / `1.SYNC_MODULE_FILES.ps1`
+### `1.SYNC_MODULE_FILES.sh`
 
 This pre-build hook automatically syncs the `[prop]` section from `kam.toml` to the `module.prop` file in your module directory and generates `update.json` in the project root.
 
