@@ -95,7 +95,6 @@ Default post-build hook behaviors:
 - `9000.UPLOAD_IF_ENABLED.sh`: If `KAM_RELEASE_ENABLED=1`, this hook creates a GitHub Release using the assets in `dist/` and will include signatures (`*.sig`, `*.sigstore.json`) and timestamp tokens (`*.tsr`) automatically if `KAM_SIGN_ENABLE=1` is set and those files are present in `dist/`. Use `KAM_PRE_RELEASE=1` to create a pre-release. If `KAM_IMMUTABLE_RELEASE=1` is set and the release tag already exists, the upload will be skipped to avoid modifying an immutable release.
 
 | `KAM_SIGN_ENABLED` | Set to `1` when build invoked with `-s/--sign`. Useful to trigger automatic signing in hooks. |
-| `KAM_IMMUTABLE_RELEASE` | Set to `1` when build invoked with `-i/--immutable-release`. Hooks can use this to opt into immutable release behavior. |
 | `KAM_PRE_RELEASE` | Set to `1` when build invoked with `-P/--pre-release`. Hooks can use this to change release handling (e.g., skip uploads). |
 
 钩子允许你在构建过程中的不同阶段运行自定义脚本。Kam 提供灵活的钩子系统，附带共享的工具和预定义的环境变量，便于在钩子脚本中使用。
@@ -148,5 +147,4 @@ Kam 在执行钩子时会直接调用钩子文件，由操作系统或文件本�
 | `KAM_STAGE` | 当前构建阶段：`pre-build` 或 `post-build`。 |
 | `KAM_DEBUG` | 若设为 `1`，钩子会输出调试信息。 |
 | `KAM_SIGN_ENABLED` | 若为 `1` 则表示 build 时带有 `-s/--sign`，钩子可据此触发签名步骤。 |
-| `KAM_IMMUTABLE_RELEASE` | 若为 `1` 则表示 build 时带有 `-i/--immutable-release`，钩子可据此选择不可变发布相关行为。 |
 | `KAM_PRE_RELEASE` | 若为 `1` 则表示 build 时带有 `-P/--pre-release`，钩子可据此调整发布流程（例如跳过发布）。 |
