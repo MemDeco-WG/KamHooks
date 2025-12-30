@@ -47,7 +47,8 @@ if [ -z "$CHANGELOG_SECTION" ]; then
     CHANGELOG_SECTION="- See CHANGELOG.md"
 fi
 
-RELEASE_NOTES=$(cat <<EOF
+RELEASE_NOTES=$(
+    cat <<EOF
 ${KAM_MODULE_NAME:-$KAM_MODULE_ID} v${KAM_MODULE_VERSION:-unknown}
 
 Module: ${KAM_MODULE_ID}
@@ -60,7 +61,7 @@ ${CHANGELOG_SECTION}
 Built with [Kam](https://github.com/MemDeco-WG/Kam)
 EOF
 )
-printf "%s\n" "$RELEASE_NOTES" > "$TMP_CHANGELOG"
+printf "%s\n" "$RELEASE_NOTES" >"$TMP_CHANGELOG"
 log_info "打包以下文件：$(ls -1 "$DIST")"
 # Decide which repository to use for the release.
 # Priority:
@@ -86,12 +87,6 @@ else
             # Try to capture the last two path components (owner/repo)
             if [[ "$REMOTE_URL" =~ ([^/]+/[^/]+)$ ]]; then
                 REPO="${BASH_REMATCH[1]}"
-            else
-                # Fallback: strip protocol/host or ssh prefix then capture last two components
-                PATH_PART=$(echo "$REMOTE_URL" | sed -E 's#^[^:]+:[/]*##; s#^[^/]+://[^/]+/##')
-                if [[ "$PATH_PART" =~ ([^/]+/[^/]+)$ ]]; then
-                    REPO="${BASH_REMATCH[1]}"
-                fi
             fi
             REPO_SOURCE="git remote (origin)"
         fi
